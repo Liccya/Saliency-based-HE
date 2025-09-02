@@ -1,0 +1,128 @@
+/home/yvonne/.local/lib/python3.8/site-packages/kornia/feature/lightglue.py:44: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  @torch.cuda.amp.custom_fwd(cast_inputs=torch.float32)
+Building and initializing stl10 parameters
+Sequential(
+  (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  (2): ReLU()
+  (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  (6): ReLU()
+  (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  (10): ReLU()
+  (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (12): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (13): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  (14): ReLU()
+  (15): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (16): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1))
+  (17): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  (18): ReLU()
+  (19): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+  (20): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  (21): ReLU()
+  (22): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+)
+Sequential(
+  (0): Linear(in_features=256, out_features=10, bias=True)
+)
+--------------------------------------------------
+Skript wird mit den folgenden Argumenten gestartet:
+  Mode: Test
+  Project's path: /home/yvonne/Documents/CNN_compact/
+  Compression: Yes
+  Compression guided by: Feature extraction
+  Encryption: Yes
+  Encryption guided by: Feature extraction
+  Shared Guidance: Yes
+--------------------------------------------------
+Output directory (Old files of the same flags will be overwritten!): /home/yvonne/Documents/CNN_compact/output/experiments/stl10_encrypted_feature extraction_compressed_feature extraction_shared_color/
+Building STL10 data loader with 1 workers
+Files already downloaded and verified
+Building STL10 data loader with 1 workers
+Files already downloaded and verified
+Building STL10 data loader with 1 workers
+Files already downloaded and verified
+Connecting...
+Connected to ('127.0.0.1', 47070)
+DEBUG: loading model from:  /home/yvonne/Documents/CNN_compact/
+=> Loading resume checkpoint '/home/yvonne/Documents/CNN_compact/output/experiments/stl10_encrypted_feature extraction_compressed_feature extraction_shared_color/model/reveal_network_weights.pth'
+=> Resumed from epoch 0 and model moved to cuda:0.
+/home/yvonne/.local/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/yvonne/.local/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/yvonne/Documents/CNN_compact/RIC/PerceptualSimilarity/models/dist_model.py:73: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  self.net.load_state_dict(torch.load(model_path, **kw), strict=False)
+/home/yvonne/Documents/CNN_compact/RIC/mobilenet_v3.py:201: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(os.path.join(base_project_path,'compress_Data/model_data/mobilenetv3-large-1cd25616.pth'))
+/home/yvonne/Documents/CNN_compact/RIC/Server_net.py:115: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load('%s/net_params_%d.pkl' % (model_dir, epoch), map_location=device))
+/home/yvonne/Documents/CNN_compact/RIC/Server.py:113: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(filepath, map_location='cpu')
+/home/yvonne/Documents/CNN_compact/RIC/Server_net.py:82: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(buffer), map_location=map_location)
+Server: Data saved through compression 0: 0.0000 MB
+Server: Client-Iterationtime for Batch 0: 0.7594s
+Server: Client-Memory-measure 0: 0.0510 MB
+Server: Client-Peak-Memory-measure 0: 2.2144 MB
+classification success rate:10/10=1.000000
+avg. l2loss_secrets:109.718884
+avg. l2loss_covers:27.142885
+avg. psnr_secrets:3.619337
+avg. ssim_secrets:0.028980
+avg. mean_pixel_errors:135.803089
+avg. lpips_errors:1.101369
+avg. lpips_scs:1.118002
+avg. mse_scs:52.608424
+avg. psnr_scs:10.038790
+avg. ssim_scs:0.024046
+avg. duration on client side: 0.759396s
+avg. memory usage on client side: 0.051003MB
+avg. peak memory usage on client side: 2.214364MB
+avg. data saved through compression: 0.000000MB
+
+Server: Data saved through compression 1: 0.0000 MB
+Server: Client-Iterationtime for Batch 1: 0.2681s
+Server: Client-Memory-measure 1: 0.0226 MB
+Server: Client-Peak-Memory-measure 1: 2.2169 MB
+classification success rate:20/20=1.000000
+avg. l2loss_secrets:109.542348
+avg. l2loss_covers:27.110053
+avg. psnr_secrets:3.644297
+avg. ssim_secrets:0.024560
+avg. mean_pixel_errors:135.499488
+avg. lpips_errors:1.103194
+avg. lpips_scs:1.123056
+avg. mse_scs:54.376209
+avg. psnr_scs:9.752945
+avg. ssim_scs:0.022595
+avg. duration on client side: 0.513756s
+avg. memory usage on client side: 0.036799MB
+avg. peak memory usage on client side: 2.215630MB
+avg. data saved through compression: 0.000000MB
+
+Server: Data saved through compression 2: 0.0000 MB
+Server: Client-Iterationtime for Batch 2: 0.1921s
+Server: Client-Memory-measure 2: 0.0197 MB
+Server: Client-Peak-Memory-measure 2: 2.2169 MB
+classification success rate:30/30=1.000000
+avg. l2loss_secrets:109.089110
+avg. l2loss_covers:26.967264
+avg. psnr_secrets:3.674799
+avg. ssim_secrets:0.026804
+avg. mean_pixel_errors:135.069736
+avg. lpips_errors:1.104895
+avg. lpips_scs:1.129265
+avg. mse_scs:54.262893
+avg. psnr_scs:9.779637
+avg. ssim_scs:0.022851
+avg. duration on client side: 0.406543s
+avg. memory usage on client side: 0.031110MB
+avg. peak memory usage on client side: 2.216051MB
+avg. data saved through compression: 0.000000MB
+
+Server closed - finished.
