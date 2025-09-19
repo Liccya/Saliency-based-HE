@@ -11,8 +11,8 @@ import argparse
 PORT = 5001
 
 ### PATH MANAGEMENT ###
-BASE_PROJECT_PATH = "/home/yvonne/Documents/CNN_compact/"
-CLIENT_BASE_PATH = '/home/test/Documents/CNN_compact/' 
+BASE_PROJECT_PATH = "/your/path/here/"
+CLIENT_BASE_PATH = '/your/path/here/' 
 use_iot = False
 SERVER_SCRIPT = BASE_PROJECT_PATH + "RIC/Server.py"
 CLIENT_SCRIPT = BASE_PROJECT_PATH + "RIC/IoT_client.py"

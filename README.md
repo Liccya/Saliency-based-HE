@@ -226,13 +226,13 @@ Check the number of epochs int he server.py script (here it's 3 for testing purp
 ```
 run the Server.py with desired arguments to train for in train mode:
 ```
-    /usr/bin/python3 "/home/yvonne/Documents/CNN_compact/RIC/Server.py" --base_project_path="/home/yvonne/Documents/CNN_compact/" --train --encrypt --sal_for_he
+    /usr/bin/python3 "your/path/here/RIC/Server.py" --base_project_path="your/path/here/" --train --encrypt --sal_for_he
 ```
 
 check your choosen arguments again in the output:
 ```
   Mode: Train
-  Project's path: /home/yvonne/Documents/CNN_compact/
+  Project's path: your/path/here/
   Compression: No
   Compression guided by: Feature extraction
   Encryption: Yes
@@ -242,7 +242,7 @@ check your choosen arguments again in the output:
 
 take note of the output directory:
 ```
-    Output directory (Old files of the same flags will be overwritten!): /home/yvonne/Documents/CNN_compact/output/experiments/svhn_encrypted_saliency_uncompressed_feature extraction_seperate_color/
+    Output directory (Old files of the same flags will be overwritten!): your/path/here/output/experiments/svhn_encrypted_saliency_uncompressed_feature extraction_seperate_color/
 ```
 
 the generated weights will be saved there in model_train_epochs. at the end of training the latest trained model will be split and saved to the model subfolder. Next time in testing, the newly trianed weights will be used automatically. 
