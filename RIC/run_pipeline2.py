@@ -254,7 +254,7 @@ if __name__ == "__main__":
     share_guide = True
     
     # Run the full pipeline (train and test) with the initial configuration
-    run_pipeline_for_config(sal_for_he, compress, sal_for_cs, encrypt, share_guide, train_mode=False)
+    run_pipeline_for_config(sal_for_he, compress, sal_for_cs, encrypt, share_guide, train_mode=True)
 '''
     #pipe share sal
     sal_for_he = True

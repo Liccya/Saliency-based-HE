@@ -218,13 +218,37 @@ You can now also look at the path specified in the Server script output earlier 
 
 
 ## Example Train run
-### Automatic
-in run_pipeline2.py at your paths in line 18 and 19:
-```
-    BASE_PROJECT_PATH = "/your/path/here"
-    CLIENT_BASE_PATH = '/your/path/here' 
-```
-the path should lead to the local save point of this github directory.
-### Manual
+Check the number of epochs int he server.py script (here it's 3 for testing purposes):
 
+```
+    if train_mode:
+        train(train_loader, beta, learning_rate, batch_size, 0, 3)
+```
+run the Server.py with desired arguments to train for in train mode:
+```
+    /usr/bin/python3 "/home/yvonne/Documents/CNN_compact/RIC/Server.py" --base_project_path="/home/yvonne/Documents/CNN_compact/" --train --encrypt --sal_for_he
+```
 
+check your choosen arguments again in the output:
+```
+  Mode: Train
+  Project's path: /home/yvonne/Documents/CNN_compact/
+  Compression: No
+  Compression guided by: Feature extraction
+  Encryption: Yes
+  Encryption guided by: Saliency map
+  Shared Guidance: No
+```
+
+take note of the output directory:
+```
+    Output directory (Old files of the same flags will be overwritten!): /home/yvonne/Documents/CNN_compact/output/experiments/svhn_encrypted_saliency_uncompressed_feature extraction_seperate_color/
+```
+
+the generated weights will be saved there in model_train_epochs. at the end of training the latest trained model will be split and saved to the model subfolder. Next time in testing, the newly trianed weights will be used automatically. 
+
+During training you can monitor the loss per batch:
+```
+    Training: Batch 1/1145. Loss of -1.9469,secret loss of 0.2198, attack1_loss of -4.1449, loss_cover 0.01306, ssim_loss: -0.0043
+```
+But this printing makes the training process take even longer! comment it out in the code of Server.py line 457, if not needed.

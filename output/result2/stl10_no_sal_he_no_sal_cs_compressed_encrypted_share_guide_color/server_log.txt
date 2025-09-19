@@ -47,7 +47,7 @@ Files already downloaded and verified
 Building STL10 data loader with 1 workers
 Files already downloaded and verified
 Connecting...
-Connected to ('127.0.0.1', 48566)
+Connected to ('127.0.0.1', 43064)
 DEBUG: loading model from:  /home/yvonne/Documents/CNN_compact/
 => Loading resume checkpoint '/home/yvonne/Documents/CNN_compact/output/experiments/stl10_encrypted_feature extraction_compressed_feature extraction_shared_color/model/reveal_network_weights.pth'
 => Resumed from epoch 0 and model moved to cuda:0.
@@ -66,62 +66,62 @@ DEBUG: loading model from:  /home/yvonne/Documents/CNN_compact/
 /home/yvonne/Documents/CNN_compact/RIC/Server_net.py:82: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   tensor = torch.load(io.BytesIO(buffer), map_location=map_location)
 Server: Data saved through compression 0: 0.0000 MB
-Server: Client-Iterationtime for Batch 0: 0.7012s
-Server: Client-Memory-measure 0: 0.0511 MB
+Server: Client-Iterationtime for Batch 0: 0.6586s
+Server: Client-Memory-measure 0: 0.0510 MB
 Server: Client-Peak-Memory-measure 0: 2.2144 MB
 classification success rate:10/10=1.000000
-avg. l2loss_secrets:110.369250
-avg. l2loss_covers:27.208770
-avg. psnr_secrets:3.571783
-avg. ssim_secrets:0.029359
-avg. mean_pixel_errors:136.653663
-avg. lpips_errors:1.104484
-avg. lpips_scs:1.114434
-avg. mse_scs:52.634793
-avg. psnr_scs:10.036134
-avg. ssim_scs:0.024941
-avg. duration on client side: 0.701229s
-avg. memory usage on client side: 0.051070MB
+avg. l2loss_secrets:109.707524
+avg. l2loss_covers:27.113479
+avg. psnr_secrets:3.621308
+avg. ssim_secrets:0.031207
+avg. mean_pixel_errors:135.717915
+avg. lpips_errors:1.103530
+avg. lpips_scs:1.120113
+avg. mse_scs:52.634054
+avg. psnr_scs:10.033976
+avg. ssim_scs:0.022455
+avg. duration on client side: 0.658598s
+avg. memory usage on client side: 0.050999MB
 avg. peak memory usage on client side: 2.214364MB
 avg. data saved through compression: 0.000000MB
 
 Server: Data saved through compression 1: 0.0000 MB
-Server: Client-Iterationtime for Batch 1: 0.1910s
-Server: Client-Memory-measure 1: 0.0227 MB
+Server: Client-Iterationtime for Batch 1: 0.1925s
+Server: Client-Memory-measure 1: 0.0226 MB
 Server: Client-Peak-Memory-measure 1: 2.2169 MB
 classification success rate:20/20=1.000000
-avg. l2loss_secrets:109.994962
-avg. l2loss_covers:27.167421
-avg. psnr_secrets:3.612445
-avg. ssim_secrets:0.025403
-avg. mean_pixel_errors:135.948743
-avg. lpips_errors:1.096251
-avg. lpips_scs:1.126965
-avg. mse_scs:54.341435
-avg. psnr_scs:9.759074
-avg. ssim_scs:0.023614
-avg. duration on client side: 0.446132s
-avg. memory usage on client side: 0.036866MB
+avg. l2loss_secrets:109.566280
+avg. l2loss_covers:27.097933
+avg. psnr_secrets:3.642485
+avg. ssim_secrets:0.025100
+avg. mean_pixel_errors:135.591406
+avg. lpips_errors:1.108296
+avg. lpips_scs:1.128719
+avg. mse_scs:54.314906
+avg. psnr_scs:9.762539
+avg. ssim_scs:0.021256
+avg. duration on client side: 0.425540s
+avg. memory usage on client side: 0.036775MB
 avg. peak memory usage on client side: 2.215630MB
 avg. data saved through compression: 0.000000MB
 
 Server: Data saved through compression 2: 0.0000 MB
-Server: Client-Iterationtime for Batch 2: 0.1762s
-Server: Client-Memory-measure 2: 0.0198 MB
+Server: Client-Iterationtime for Batch 2: 0.1781s
+Server: Client-Memory-measure 2: 0.0197 MB
 Server: Client-Peak-Memory-measure 2: 2.2169 MB
 classification success rate:30/30=1.000000
-avg. l2loss_secrets:109.410602
-avg. l2loss_covers:27.005980
-avg. psnr_secrets:3.651607
-avg. ssim_secrets:0.027889
-avg. mean_pixel_errors:135.364840
-avg. lpips_errors:1.099152
-avg. lpips_scs:1.137767
-avg. mse_scs:54.203158
-avg. psnr_scs:9.789728
-avg. ssim_scs:0.024190
-avg. duration on client side: 0.356160s
-avg. memory usage on client side: 0.031177MB
+avg. l2loss_secrets:108.951078
+avg. l2loss_covers:26.932338
+avg. psnr_secrets:3.686006
+avg. ssim_secrets:0.027873
+avg. mean_pixel_errors:134.826895
+avg. lpips_errors:1.103731
+avg. lpips_scs:1.132776
+avg. mse_scs:54.186457
+avg. psnr_scs:9.792059
+avg. ssim_scs:0.023415
+avg. duration on client side: 0.343058s
+avg. memory usage on client side: 0.031078MB
 avg. peak memory usage on client side: 2.216051MB
 avg. data saved through compression: 0.000000MB
 

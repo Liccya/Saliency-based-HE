@@ -357,11 +357,11 @@ def train(train_loader, beta, learning_rate, batch_size, start_epoch=0, num_epoc
     
     color_nets = color
 
-    net_rev = Net(base_project_path, residual_en, residual_de, lambda_net, small, compress, encrypt, color_nets).to(device)
+    net_rev = Net(base_project_path, residual_en, residual_de, lambda_net, compress, encrypt).to(device)
     if small:
-        net_hide = Netw_small(color_nets, residual_en,residual_de,lambda_net).to(device)
+        net_hide = Netw_small(residual_en,residual_de,lambda_net).to(device)
     else:
-        net_hide = Netw_regular(color_nets, residual_en,residual_de,lambda_net).to(device)
+        net_hide = Netw_regular(residual_en,residual_de,lambda_net).to(device)
     
     if compress:
         epoch = 320
@@ -369,7 +369,7 @@ def train(train_loader, beta, learning_rate, batch_size, start_epoch=0, num_epoc
         B = 8
         N = B*B
         model_compress = Adaptive_CS_compress(base_project_path, sal_cs, color, N_p, B, 1, torch.zeros(N, N))
-        model_decompress = Adaptive_CS_decompress(base_project_path, N_p, B, 1, torch.zeros(N, N))
+        model_decompress = Adaptive_CS_decompress(base_project_path, color, N_p, B, 1, torch.zeros(N, N))
         model_compress = torch.nn.DataParallel(model_compress).to(device)
         model_decompress = torch.nn.DataParallel(model_decompress).to(device)
         model_dir = '%s/layer_%d_block_%d' % (os.path.join(base_project_path,'compress_Data/model'), N_p, B)
@@ -410,17 +410,23 @@ def train(train_loader, beta, learning_rate, batch_size, start_epoch=0, num_epoc
                 ###change to greyscale end ###
                 train_secrets_original = train_secrets_gs
             
-            mix_img = net_hide(train_secrets_original, secret_sal, train_covers, train=True)
+            mix_img, share = net_hide(train_secrets_original, secret_sal, train_covers, train=True)
             if compress:
                 x_2_compressed=[]
                 x_2 = mix_img
                 for i in range(x_2.shape[0]):
+                    if share is not None:
+                        # Extract the single saliency map for the current image
+                        share_single = share[i:i+1]
+                    else:
+                        share_single = None
                     x_2_single = x_2[i:i+1]
                     PhiT_Phi_basic, PhiT_y_basic, x_uv_downsampled, L, shape_info = model_compress(
                     x_2_single, 
                     int(np.ceil(0.01 * N)),
                     0.5,
                     0.01,
+                    share_single
                     )   
                     x_2_single_compressed=[PhiT_Phi_basic, PhiT_y_basic, x_uv_downsampled, L,shape_info]
                     x_2_compressed.append(x_2_single_compressed)
@@ -437,7 +443,7 @@ def train(train_loader, beta, learning_rate, batch_size, start_epoch=0, num_epoc
                 mix_img = x_2
             #print(f"DEBUG: Client x_2 0 after compress: {x_2[0]}")
 
-            _, recover_secret = net_rev(mix_img, train_covers, labels, None, train=True)
+            _, recover_secret, _, _ , _ = net_rev(mix_img, train_covers, labels, None, train=True)
             
             train_loss, train_loss_secret, attloss, loss_cover, ssim_loss = attack1_loss(recover_secret,mix_img, train_secrets_original,train_covers,beta,labels)
 
@@ -448,8 +454,7 @@ def train(train_loader, beta, learning_rate, batch_size, start_epoch=0, num_epoc
             train_losses.append(train_loss.item())
 
             # Prints mini-batch losses - use if needed
-            '''if idx%100==0:
-            print('Training: Batch {0}/{1}. Loss of {2:.4f},secret loss of {3:.4f}, attack1_loss of {4:.4f}, loss_cover {5:.5f}, ssim_loss: {6:.4f}'.format(idx+1, len(train_loader), train_loss.data,  train_loss_secret.data,attloss.data,loss_cover,ssim_loss))'''
+            print('Training: Batch {0}/{1}. Loss of {2:.4f},secret loss of {3:.4f}, attack1_loss of {4:.4f}, loss_cover {5:.5f}, ssim_loss: {6:.4f}'.format(idx+1, len(train_loader), train_loss.data,  train_loss_secret.data,attloss.data,loss_cover,ssim_loss))
 
         modelsavepath = os.path.join(output_dir,'Epoch_{}_hide'.format(epoch))
         save_checkpoint({
