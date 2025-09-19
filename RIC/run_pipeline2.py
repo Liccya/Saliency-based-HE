@@ -6,17 +6,13 @@ import base64
 import pickle
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 import argparse
 
 PORT = 5001
 
 ### PATH MANAGEMENT ###
 BASE_PROJECT_PATH = "/home/yvonne/Documents/CNN_compact/"
-CLIENT_BASE_PATH = '/home/test/Documents/CNN/' 
+CLIENT_BASE_PATH = '/home/test/Documents/CNN_compact/' 
 use_iot = False
 SERVER_SCRIPT = BASE_PROJECT_PATH + "RIC/Server.py"
 CLIENT_SCRIPT = BASE_PROJECT_PATH + "RIC/IoT_client.py"
@@ -58,14 +54,6 @@ def generate_args(mode, sal_for_he, compress, sal_for_cs, encrypt, share_guide):
     
     return args
 
-# E-Mail
-SENDER_EMAIL = "xxanyuxx@gmail.com" 
-TOKEN_DIR = os.path.join(BASE_PROJECT_PATH, ".credentials")
-os.makedirs(TOKEN_DIR, exist_ok=True)
-TOKEN_FILE = os.path.join(TOKEN_DIR, 'token.pickle')    
-RECEIVER_EMAIL = "ygross_99@gmx.de" 
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
 
 def kill_process_on_port(port):
     """
@@ -106,7 +94,7 @@ def run_script(script_path, args, log_file, wait_for_ready=False):
         process = subprocess.Popen(['python3', script_path] + args, stdout=f, stderr=f, text=True)
     
     if wait_for_ready:
-        print("Wait 100 Sekonds, until Server is ready...")
+        print("Wait 100 Seconds, until Server is ready...")
         time.sleep(50) 
     
     return process
@@ -119,57 +107,7 @@ def get_last_lines(log_file, num_lines=50):
         lines = f.readlines()
         return "".join(lines[-num_lines:])
 
-def send_email_with_logs_and_images(server_log_content, client_log_content, image_paths, args):
-    
-    print("Sending Mail...")
-    creds = None
-    if os.path.exists(TOKEN_FILE):
-        with open(TOKEN_FILE, 'rb') as token:
-            creds = pickle.load(token)
-    
-    if not creds or not creds.valid:
-        print("Error: The Token file does not exist or is damaged. Please regenerate.")
-        return
 
-    try:
-        service = build('gmail', 'v1', credentials=creds)
-
-        message = MIMEMultipart()
-        message['to'] = RECEIVER_EMAIL
-        message['from'] = SENDER_EMAIL
-        message['subject'] = "Modell-Training- and Testreview"
-
-        body = f"Training and Test for {args} are done. Excerpt of Log Data as follows:\n\n"
-        body += "--- SERVER LOG ---\n"
-        body += server_log_content
-        body += "\n\n--- CLIENT LOG ---\n"
-        body += client_log_content
-
-        message.attach(MIMEText(body, 'plain'))
-
-        for img_path in image_paths:
-            if os.path.exists(img_path):
-                try:
-                    part = MIMEBase('application', 'octet-stream')
-                    with open(img_path, 'rb') as attachment:
-                        part.set_payload(attachment.read())
-                    encoders.encode_base64(part)
-                    part.add_header('Content-Disposition',
-                                    f"attachment; filename= {os.path.basename(img_path)}")
-                    message.attach(part)
-                except Exception as e:
-                    print(f"Error attaching Image {img_path}: {e}")
-            else:
-                print(f"Warning: Image '{img_path}' not found.")
-
-        raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
-        
-        send_message = {'raw': raw_message}
-        (service.users().messages().send(userId='me', body=send_message).execute())
-        
-        print("E-Mail send successfully.")
-    except Exception as e:
-        print(f"Error sending Mail: {e}")
 
 def pipe(trargs, teargs, train = True):
     kill_process_on_port(PORT)
@@ -198,14 +136,6 @@ def pipe(trargs, teargs, train = True):
         #test_process.terminate() #Not needed as Server stops automatically
         print("Test completed.")
 
-    '''# Step 4: read logs
-    server_log_content = get_last_lines(SERVER_LOG)
-    client_log_content = get_last_lines(CLIENT_LOG)
-
-    # Step 5: send Mail with logs and iamges
-    image_paths_to_attach = [os.path.join(IMAGE_DIR, img_name) for img_name in IMAGES_TO_ATTACH]
-    send_email_with_logs_and_images(server_log_content, client_log_content, image_paths_to_attach, teargs)
-    '''
     print("Pipeline concluded.")
 
 def run_pipeline_for_config(sal_for_he, compress, sal_for_cs, encrypt, share_guide, train_mode=True):
